@@ -1,0 +1,71 @@
+// HỆ SINH THÁI RỪNG 1
+List giao(List L1, List L2){
+    List kq;
+    make_null(&kq);
+    int i, j;
+    for (i = 0; i < L1.size; ++i){
+        for (j = 0; j < L2.size; ++j){
+            if (L1.data[i] == L2.data[j]) push_back(&kq, L1.data[i]);
+        }
+    }
+    return kq;
+}
+int main(){
+	int n, m, u, v, e, x, y;
+//	freopen("HeSinhThaiRung.txt", "r", stdin); //Khi n?p bài nh? b? dòng này
+	scanf("%d%d", &n, &m);
+	Graph G;
+	init_Graph(&G,n);
+	for (e = 1; e <= m; e++) {
+		scanf("%d%d", &u, &v);
+		add_edge(&G,u, v);
+	}
+	scanf("%d%d", &x, &y);
+	List L1 = neighbors(&G, x);
+ 	List L2 = neighbors(&G, y);
+    	List kq = giao(L1, L2);
+    	if(kq.size == 0){
+    		printf("KHONG CHUNG DOI THU");
+	}
+	else{
+		for(e = 0; e < kq.size ; e++){
+			printf("%d ",kq.data[e]);
+		}
+	}
+	return 0;
+}
+
+
+
+// HỆ SINH THÁI RỪNG 2
+List giao(List L1, List L2){
+    List kq;
+    make_null(&kq);
+    int i, j;
+    for (i = 1; i <= L1.size; ++i){
+        for (j = 1; j <= L2.size; ++j){
+            if (L1.data[i] == L2.data[j]) push_back(&kq, L1.data[i]);
+        }
+    }
+    return kq;
+}
+
+int main(){
+    Graph G;
+    int n;
+    scanf("%d", &n);
+    init_graph(&G, n);
+    int i, j, t, u, v;
+    for (i = 1; i <= n; ++i){
+        for (j = 1; j <= n; ++j){
+            scanf("%d", &t);
+            G.A[i][j] = t; 
+        }
+    }
+    scanf("%d%d", &u, &v);
+    List L1 = neighbors(G, u);
+    List L2 = neighbors(G, v);
+    List kq = giao(L1, L2);
+    printf("%d ", kq.size);
+    return 0;
+}

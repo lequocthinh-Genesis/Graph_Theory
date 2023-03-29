@@ -1,0 +1,29 @@
+GỬI NHẬN MAIL 1
+int main(){
+Graph G;
+    int n,I,j,t;
+    scanf("%d", &n);
+    init_Graph(&G, n);
+    for (i = 1; i <= n; i++){
+        for (j = 1; j <= n; j++){
+            scanf("%d", &t);				// 3  
+            G.A[i][j] = t; 				// 0 1 0  sv 1 gửi cho sv1 0 email ,sv2 1 email, sv3 0 email
+        }						      // 1 0 1  sv 2 gửi cho sv1 1 email ,sv2 0 email, sv3 1 email
+    }						            // 1 2 0  sv 1 gửi cho sv1 1 email ,sv2 2 email, sv3 0 email
+	int a=1;
+	int max = 0;
+	int maxi = 0;
+	while(a<=n){
+		int tong=0;
+		for(i=1;i<=n;i++){
+			tong+=G.A[i][a];
+		}
+		if(tong>max) {
+			max=tong;
+			maxi=a;
+		}
+		a++;
+	}
+	printf("%d has received %d email(s).",maxi,max);
+	return 0;
+}

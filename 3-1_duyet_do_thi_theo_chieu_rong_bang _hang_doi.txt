@@ -1,0 +1,55 @@
+// DUYỆT ĐỒ THỊ THEO RỘNG (HÀNG ĐỢI)
+List breath_first_search(Graph *G, int n){
+	Queue Q;
+	make_null_Queue(&Q);
+	push_Queue(&Q,n);
+	List list_bfs;
+	make_null(&list_bfs);
+	int mark[MAX_Vertices];
+	int i;
+	for(i = 1; i <= G->n ; i++)
+		mark[i] = 0;
+	while(!empty(&Q)){
+		int u = top(&Q);
+		pop(&Q);
+		if( mark[u] == 1)
+			continue;
+	//	printf("Duyet %d\n",u);
+		push_back(&list_bfs,u);
+		mark[u] = 1;
+		List list = neighbors(G,u);
+		for(i = 1; i <= list.size ; i++){
+			int v = list.data[i - 1];
+			if( mark[v] == 0){
+				push_Queue(&Q,v);
+			}
+		}
+	}
+	return list_bfs;
+}
+int main(){
+//	freopen("dt.txt","r",stdin);
+	Graph G;
+	int n,m,u,v,i,j;
+	scanf("%d%d",&n,&m);
+	init_Graph(&G,n);
+	for(i = 1; i <= m ; i++){
+		scanf("%d%d",&u,&v);
+		add_edge(&G,u,v);
+	}
+	int mark_bfs[MAX_Vertices];
+	for(i = 1; i <= G.n;i++){
+		mark_bfs[i] = 0;
+	}
+	for(i = 1; i <= G.n;i++){
+		if(mark_bfs[i] == 0){
+			List bfs = breath_first_search(&G,i);
+			for(j = 1; j <= bfs.size ; j++){
+				int k = bfs.data[j - 1];
+				printf("%d\n",k);
+				mark_bfs[k] = 1;
+			}
+		}
+	}
+	return 0;
+}

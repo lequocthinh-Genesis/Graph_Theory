@@ -1,0 +1,58 @@
+#define MAX_VERTICES 1000
+int color[MAX_VERTICES];
+int fail;
+// To mau dinh bang phuong phap de quy
+void colorize(Graph* G, int x, int c) {
+// Neu dinh x da chua co mau => to no
+	if (color[x] == -1) {
+		color[x] = c;
+		List list = neighbors(G, x);
+		int j;
+		for (j = 1; j <= list.size; j++) {
+			int y = element_at(&list, j);
+			colorize(G, y, !c);
+		}
+	} 
+	else {
+		if (color[x] != c) // 1 dinh bi to 2 mau khac nhau
+			fail = 1;
+		}
+	}
+int is_bigraph(Graph* G) {
+// Khoi tao color, chua dinh nao co mau
+	int j;
+	for (j = 1; j <= G->n; j++) {
+		color[j] = -1;
+	}
+	fail = 0;
+	colorize(G, 1, 0); // To mau dinh 1 bang mau den
+	return !fail;
+}
+
+int main(){
+	//freopen("dt.txt","r",stdin);
+	Graph G;
+	int n,m,u,v,i;
+	scanf("%d%d",&n,&m);
+	init_Graph(&G,n);
+	for(i = 1; i <= m ; i++){
+		scanf("%d%d",&u,&v);
+		add_edge(&G,u,v);
+	}
+	if (is_bigraph(&G)) {
+		//int i;
+		for (i = 1; i <= G.n; i++) {
+			if (!color[i]) {
+				printf("%d ", i);
+			}
+		}
+		printf("\n");
+		for (i = 1; i <= G.n; i++) {
+			if (color[i]) {
+				printf("%d ", i);
+			}
+		}
+	}
+	else printf("IMPOSSIBLE");
+	return 0;
+}

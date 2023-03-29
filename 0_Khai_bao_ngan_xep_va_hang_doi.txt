@@ -1,0 +1,48 @@
+// KHAI BÁO NGĂN XẾP
+Typedef struct {
+	int data[MAX_ELEMENTS];
+	int size;
+} Stack;
+void make_null_stack(Stack* S) {
+	S->size = 0;
+}
+void push(Stack* S, int x) {
+	S->data[S->size] = x;
+	S->size++;
+}
+int top(Stack* S) {
+	return S->data[S->size - 1];
+}
+void pop(Stack* S) {
+	S->size--;
+}
+int empty(Stack* S) {
+	return S->size == 0;
+}
+
+
+
+
+
+// KHAI BÁO HÀNG ĐỢI
+typedef struct{
+	int data[MAX_ELEMENTS];
+	int front,rear;
+}Queue;
+void make_null_Queue(Queue *Q){
+	Q->front = 0;
+	Q->rear = -1;
+}
+void push_Queue(Queue *Q, int x){
+	Q->rear++;
+	Q->data[Q->rear] = x;
+}
+int top(Queue *Q){
+	return Q->data[Q->front];
+}
+void pop(Queue *Q){
+	Q->front++;
+}
+int empty(Queue *Q){
+	return Q->front > Q->rear;
+}
