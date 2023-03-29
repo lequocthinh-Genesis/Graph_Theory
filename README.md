@@ -3,7 +3,7 @@
 
 ## Mô tả project:
 
-- Đây là code về các bài tập mà tôi đã học ở môn Lý Thuyết Đồ Thị.
+- Đây là code về các bài tập mà tôi đã học ở môn Lý Thuyết Đồ Thị tại Trường Đại Học Cần Thơ.
 
 ## Công nghệ sử dụng:
 
